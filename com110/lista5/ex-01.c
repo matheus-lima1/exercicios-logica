@@ -248,6 +248,7 @@ main(){
         espaco++;
         for (x=0; x<metade; x++){
 
+
             asterisco-=2;
             espaco++;
 

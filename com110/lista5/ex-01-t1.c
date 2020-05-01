@@ -155,21 +155,120 @@ void trianguloEquilatero(){
 
     area = ((lado*lado)*sqrt(3))/4;
     perimetro = lado*3;
+    aux=lado;
 
     printf("\n");
     printf("Area: %.2f \n", area);
     printf("Perimetro: %.2f \n\n\n", perimetro);
 
-    aux=lado;
-    for(i=0 ; i<lado/2 ; i++){
+    for(i=0 ; i<lado ; i++){
+        printf(" ");
+    }
+    printf(" .\n");
+    for(i=0 ; i<lado ; i++){
+        printf(" ");
+    }
+    printf("/ \\ \n");
+
+    for(i=0 ; i<lado+1 ; i++){
+            aux = aux-1;
+        for(j=0 ; j<aux+1 ; j++){
+            printf(" ");
+        }
+        printf("/");
+
+        for(j=0 ; j<i ; j++){
+            printf(" @");
+        }
+        printf(" \\");
+        printf("\n");
+
+    }
+
+    for(i=0 ; i<2*lado+3;i++){
+        printf("-");
+    }
+
+}
+
+void trianguloRetangulo(){
+
+    int i,j,lado,h,aux;
+    float area,perimetro;
+
+    for(i=0;i<36;i++){
+        printf("=");
+    }
+    printf("\n");
+    printf("             Triângulo Retângulo              \n");
+
+    for(i=0;i<36;i++){
+        printf("=");
+    }
+    printf("\n");
+
+    printf("Informe o lado do triângulo(catetos devem ser iguais): ");
+    scanf("%d", &lado);
+
+
+    area = (lado*lado)/2;
+    h = (lado*lado)+(lado*lado);
+    perimetro = sqrt(h);
+
+    printf("\n");
+    printf("Area: %.2f \n", area);
+    printf("Perimetro: %.2f \n\n\n", perimetro);
+
+    printf("|\\\n");
+
+    for(i=1 ; i<lado ;i++){
+        printf("|");
+        for(j=1 ; j<=i ; j++){
+            printf("@");
+        }
+        printf("\\\n");
+        aux = aux-1;
+    }
+    printf("-");
+    for(i=0 ; i<lado ; i++){
+        printf("-");
+    }
+}
+
+void outroMenu(){
+
+    int baseMaior,i,baseMenor,aux,j,lado;
+
+    for(i=0;i<36;i++){
+        printf("=");
+    }
+    printf("\n");
+    printf("             Trapézio              \n");
+
+    for(i=0;i<36;i++){
+        printf("=");
+    }
+    printf("\n");
+
+    printf("Informe a base menor do trapézio: ");
+    scanf("%d", &baseMenor);
+    printf("Informe a base maior do trapézio: ");
+    scanf("%d", &lado);
+
+    for(i=0 ; i<lado ; i++){
+        printf(" ");
+    }
+    printf(". \n");
+    for(i=0 ; i<lado ; i++){
         printf(" ");
     }
 
-
-
+    printf("/ \\");
 
 
 }
+
+
 
 int main(){
 
@@ -177,6 +276,10 @@ int main(){
 
     int opcao;
 
+
+    printf("\n\n");
+    do{
+    printf("\n");
     exibeMenu();
     scanf("%d",&opcao);
 
@@ -189,7 +292,21 @@ int main(){
         break;
     case 3:
         trianguloEquilatero();
+        break;
+    case 4:
+        trianguloRetangulo();
+        break;
+    case 5:
+        outroMenu();
+        break;
+    case 6:
+        break;
+    default:
+        printf("Informe uma opção correta.");
+        break;
     }
+
+    } while(opcao!=6);
 
     return 0;
 }
