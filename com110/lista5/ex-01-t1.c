@@ -237,33 +237,106 @@ void trianguloRetangulo(){
 
 void outroMenu(){
 
-    int baseMaior,i,baseMenor,aux,j,lado;
+    int diagonalMaior,i,diagonalMenor,aux,j,x,lado;
+    float area,perimetro;
 
     for(i=0;i<36;i++){
         printf("=");
     }
     printf("\n");
-    printf("             Trapézio              \n");
+    printf("             Losango              \n");
 
     for(i=0;i<36;i++){
         printf("=");
     }
     printf("\n");
 
-    printf("Informe a base menor do trapézio: ");
-    scanf("%d", &baseMenor);
-    printf("Informe a base maior do trapézio: ");
+    printf("Informe o valor do lado do losango: ");
     scanf("%d", &lado);
+    printf("Informe o Diâmetro maior: ");
+    scanf("%d", &diagonalMaior);
+    printf("Informe o Diâmetro menor: ");
+    scanf("%d", &diagonalMenor);
 
-    for(i=0 ; i<lado ; i++){
-        printf(" ");
-    }
-    printf(". \n");
-    for(i=0 ; i<lado ; i++){
-        printf(" ");
+    perimetro = lado*4;
+    area = (diagonalMaior*diagonalMenor)/2;
+
+
+    printf("\n");
+    printf("Area: %.2f \n", area);
+    printf("Perimetro: %.2f \n\n\n", perimetro);
+
+    for(i=0; i<=(2*lado)+2; i++){
+        if(i==lado+2){
+            printf(".");
+       }else{
+            printf(" ");
+        }
     }
 
-    printf("/ \\");
+    printf("\n");
+
+    for(i=0; i<=(2*lado)+2; i++){
+        if(i==lado+1){
+            printf("/ \\");
+       }else{
+            printf(" ");
+       }
+    }
+
+    printf("\n");
+
+    for(i=0; i<lado; i++){
+        for(x=0; x<=lado-i-1; x++){
+                printf(" ");
+        }
+
+        printf("/ ");
+        for(j=0; j<=i; j++){
+            printf("@ ");
+
+        }
+
+        printf("\\");
+        printf("\n");
+    }
+
+    for(i=lado; i>0; i--){
+        for(x=lado ; x>=i+1 ; x--){
+            printf(" ");
+        }
+
+        printf(" \\ ");
+
+        for(j=i; j>0; j--){
+
+            printf("@ ");
+
+        }
+
+        printf("/\n");
+    }
+
+    for(i=(2*lado)+1; i>=0; i--){
+
+        if(i==lado){
+            printf("\\ /");
+        }else{
+            printf(" ");
+            }
+    }
+
+    printf("\n");
+
+    for(i=(2*lado)+2; i>=0; i--){
+        if(i==lado){
+            printf(".");
+        }else{
+            printf(" ");
+            }
+    }
+
+    printf("\n");
 
 
 }
