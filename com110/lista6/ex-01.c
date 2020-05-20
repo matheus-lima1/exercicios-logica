@@ -6,10 +6,6 @@ main(){
     int i, j,vetor[8],aux;
 
     for(i=0 ; i<8 ; i++){
-        vetor[i] = NULL;
-    }
-
-    for(i=0 ; i<8 ; i++){
        printf("Vetor[%d]: ",i);
        scanf("%d",&vetor[i]);
     }
