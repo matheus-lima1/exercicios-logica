@@ -1,31 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
-main(){
+int main()
+{
+    setlocale(LC_ALL,"Portuguese");
 
-    int i,j,matriz[2][2],r;
+    int matriz[8][8], r=0, i, j;
 
-    for(i=0 ; i<2 ; i++){
-        for(j=0 ; j<2 ; j++){
+    printf("entre com os elementos da matriz.\n");
+
+    for(i=0 ; i<8 ; i++){
+        for(j=0 ; j<8 ; j++){
             printf("Matriz[%d][%d]: ",i,j);
             scanf("%d",&matriz[i][j]);
-        }
+            }
     }
 
-    for(i=0 ; i<2 ; i++){
-        for(j=i+1 ; j<2 ; j++){
-            if(matriz[i][j] == matriz[j][i]){
-                r = 0;
-            } else {
-                r = 1;
+    for(i=0 ; i<8 ; i++){
+        for(j=0 ; j<8 ; j++){
+            if(matriz[i][j] != matriz[j][i]){
+                r =1;
+                i=8;
+                j=8;
             }
         }
     }
-
-    if(r==0){
-        printf("\nTRANSPOSTA");
-    }else{
-        printf("\nNAO TRANSPOSTA");
+    printf("\n");
+    for(i=0 ; i<8 ; i++){
+        for(j=0 ; j<8 ; j++){
+            printf("%d ",matriz[i][j]);
+        }
+        printf("\n");
     }
 
+
+    if(r==0){
+        printf("\nEla é simetrica!");
+    }else{
+        printf("\nNão é simetrica!");
+    }
 }
