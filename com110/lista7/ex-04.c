@@ -3,12 +3,12 @@
 
 main(){
 
-    int linha=2,coluna=2;
-    int i,j,x,matriz[2][2],ponto=0;
+    int linha=5,coluna=7;
+    int i,j,x,matriz[5][7],ponto=0;
     int menorLinha[linha], maiorColuna[coluna],maior,menor;
 
-    for(i=0 ; i<2 ; i++){
-        for(j=0 ; j<2 ; j++){
+    for(i=0 ; i<linha ; i++){
+        for(j=0 ; j<coluna ; j++){
             printf("Matriz[%d][%d]: ",i,j);
             scanf("%d",&matriz[i][j]);
         }
