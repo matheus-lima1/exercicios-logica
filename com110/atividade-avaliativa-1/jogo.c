@@ -23,42 +23,114 @@ void exibeMenu(){
 
 }
 
-int validaValores(int vetor[8], int valor){
+void printaMatriz(int matriz[4][4]){
 
-    int i;
+    int i,j;
 
-    for(i=0 ; i<8 ; i++){
-        if(vetor[i]==valor){
+    for(i=0 ; i<4 ; i++){
+            printf("\n");
+        for(j=0 ; j<4 ; j++){
+            printf("%d - ",matriz[i][j]);
+        }
+    }
+
+}
+
+int validaValores(int  matriz[4][4], int valor){
+
+    int i,j;
+
+    for(i=0 ; i<2 ; i++){
+        for(j=0 ; j<4 ; j++){
+           if(matriz[i][j]==valor){
             return 1;
         }
     }
+}
 
     return 0;
 
 }
 
-int geraValores(int vetor[8]){
+int validaValores2(int  matriz[4][4], int valor){
 
-    int i,aux;
+    int i,j;
+
+    for(i=2 ; i<4 ; i++){
+        for(j=0 ; j<4 ; j++){
+           if(matriz[i][j]==valor){
+            return 1;
+        }
+    }
+}
+
+    return 0;
+
+}
+
+
+int geraValores(int matriz[4][4]){
+
+    int i,j,aux;
 
     srand(time(NULL));
 
-    for(i=0 ; i<8 ; i++){
-        aux = rand()%10;
-        while(validaValores(vetor,aux)==1){
-            aux = rand()%10;
+    for(i=0 ; i<2 ; i++){
+        for(j=0 ; j<4 ; j++){
+            aux = rand()%9;
+
+            while(validaValores(matriz,aux)==1){
+                aux = rand()%9;
+            }
+
+            matriz[i][j] = aux;
+    }
+}
+
+    return matriz;
+}
+
+int geraValores2(int matriz[4][4]){
+
+    int i,j,aux,padrao;
+
+    padrao = rand()%10;
+
+    srand(time(NULL));
+
+    for(i=2 ; i<4 ; i++){
+        for(j=0 ; j<4 ; j++){
+            aux = padrao*rand()%9;
+
+            while(validaValores2(matriz,aux)==1){
+                aux = padrao*rand()%9;
+            }
+
+            matriz[i][j] = aux;
+    }
+}
+
+    return matriz;
+}
+
+
+int zeraMatriz(int matriz[4][4]){
+
+    int i,j;
+
+    for(i=0 ; i<4 ; i++){
+        for(j=0 ; j<4 ; j++){
+            matriz[i][j] = 0;
         }
-        vetor[i] = aux;
-        printf("%d ",vetor[i]);
     }
 
-    return vetor;
+    return matriz;
 }
 
 
 main(){
 
-    int i,opcao,valores[8];
+    int i,opcao,valores[8],matriz[4][4];
 
 
     do{
@@ -67,7 +139,12 @@ main(){
 
         system("cls");
 
-        geraValores(valores);
+        zeraMatriz(matriz);
+        geraValores(matriz);
+        geraValores2(matriz);
+        getch();
+        printaMatriz(matriz);
+
 
 
     } while (opcao!=2);
