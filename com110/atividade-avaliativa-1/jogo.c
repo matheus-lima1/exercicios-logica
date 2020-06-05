@@ -15,6 +15,14 @@ ARQUVIO E REGISTRI (NÃO)
 
 */
 
+struct jogador{
+
+    char nome[30];
+    int pontos;
+
+};
+
+
 void exibeMenu(){
     int i;
 
@@ -163,9 +171,6 @@ main(){
             printaMatriz(matriz);
 
             // esperar tempo
-
-            zeraMatriz(matrizJogo);
-            printaMatriz(matrizJogo);
 
         }
 
