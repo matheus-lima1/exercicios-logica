@@ -123,6 +123,7 @@ int geraValores(int matriz[4][4]){
             }
 
             matriz[i][j] = aux;
+
     }
 }
 
@@ -152,10 +153,65 @@ int geraValores2(int matriz[4][4]){
     return matriz;
 }
 
+int tentativa(int linha, int coluna, int linha2, int coluna2, int matrizJogo[4][4],int matriz[4][4],int pontos){
+
+
+    while(pontos<8){
+
+            printf("Informe a Linha do elemento que deseja exibir: ");
+            scanf("%d",&linha);
+            printf("Informe a Coluna do elemento que deseja exibir: ");
+            scanf("%d",&coluna);
+
+            matrizJogo[linha][coluna] = matriz[linha][coluna];
+            system("cls");
+            printaMatriz(matrizJogo);
+
+            printf("Informe a Linha do segundo elemento que deseja exibir: ");
+            scanf("%d",&linha2);
+            printf("Informe a Coluna do segundo elemento que deseja exibir: ");
+            scanf("%d",&coluna2);
+
+            matrizJogo[linha2][coluna2] = matriz[linha2][coluna2];
+            system("cls");
+            printaMatriz(matrizJogo);
+
+            if(matrizJogo[linha][coluna] == matrizJogo[linha2][coluna2] ){
+                printf("+1 Ponto !\n");
+                pontos++;
+                printf("Pontos: %d\n",pontos);
+                return tentativa(linha,coluna,linha2,coluna2,matrizJogo,matriz,pontos);
+
+            } else {
+                printf("Errado!\n");
+                matrizJogo[linha][coluna] = 0;
+                matrizJogo[linha2][coluna2] = 0;
+                return tentativa(linha,coluna,linha2,coluna2,matrizJogo,matriz,pontos);
+            }
+    }
+
+    return pontos;
+
+}
+
+void excluiZero(int matriz[4][4]){
+
+    int i,j;
+
+    for(i=0 ; i<4 ; i++){
+        for(j=0 ; j<4 ; j++){
+            if(matriz[i][j] == 0){
+                matriz[i][j] = 8;
+            }
+        }
+    }
+
+}
 
 main(){
 
     int i,opcao,valores[8],matriz[4][4],matrizJogo[4][4];
+    int linha,coluna,linha2,coluna2,pontos=0;
 
 
     do{
@@ -168,9 +224,12 @@ main(){
         case 1:
             geraValores(matriz);
             geraValores2(matriz);
+            excluiZero(matriz);
+            zeraMatriz(matrizJogo);
             printaMatriz(matriz);
+            printaMatriz(matrizJogo);
 
-            // esperar tempo
+            tentativa(linha,coluna,linha2,coluna2,matrizJogo,matriz,pontos);
 
         }
 
