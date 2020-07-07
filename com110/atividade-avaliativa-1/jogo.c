@@ -4,17 +4,16 @@
 #include <conio.h>
 
 
-
 /*
-
 IF-ELSE (ok)
 WHILE-FOR (ok)
 VETOR,MATRIZ (ok)
 FUNÇÃO COM PARÂMETRO(ok)
-ARQUVIO E REGISTRI (NÃO)
-
+ARQUVIO E REGISTRI (ok)
 */
 
+
+// Registro que se representa o jogador
 struct jogador{
 
     char nome[30];
@@ -22,7 +21,7 @@ struct jogador{
 
 };
 
-
+//função que exibe o menu de opções
 void exibeMenu(){
     int i;
 
@@ -59,55 +58,7 @@ void exibeMenu(){
 
 }
 
-void printaMatriz(int matriz[4][4]){
-
-    int i,j;
-
-    for(i=0 ; i<4 ; i++){
-            printf("\n");
-        for(j=0 ; j<4 ; j++){
-            printf("%d\t",matriz[i][j]);
-        }
-        printf("\n");
-    }
-
-    printf("\n");
-
-}
-
-int validaValores(int  matriz[4][4], int valor){
-
-    int i,j;
-
-    for(i=0 ; i<2 ; i++){
-        for(j=0 ; j<4 ; j++){
-           if(matriz[i][j]==valor){
-            return 1;
-        }
-    }
-}
-
-    return 0;
-
-}
-
-int validaValores2(int  matriz[4][4], int valor){
-
-    int i,j;
-
-    for(i=2 ; i<4 ; i++){
-        for(j=0 ; j<4 ; j++){
-           if(matriz[i][j]==valor){
-            return 1;
-        }
-    }
-}
-
-    return 0;
-
-}
-
-
+//função que gera valores aleatórios para a primeira parte da matriz
 int geraValores(int matriz[4][4]){
 
     int i,j,aux;
@@ -130,6 +81,7 @@ int geraValores(int matriz[4][4]){
     return matriz;
 }
 
+//função que gera valores aleatórios para a segunda parte da matriz
 int geraValores2(int matriz[4][4]){
 
     int i,j,aux,padrao;
@@ -150,9 +102,62 @@ int geraValores2(int matriz[4][4]){
     }
 }
 
-    return matriz;
+   //return matriz;
 }
 
+// função que imprime a matriz principal do jogo
+void printaMatriz(int matriz[4][4]){
+
+    int i,j;
+
+    for(i=0 ; i<4 ; i++){
+            printf("\n");
+        for(j=0 ; j<4 ; j++){
+            printf("%d\t",matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+
+}
+
+//função que verifica se os valores da primeira parte não se repetem
+int validaValores(int  matriz[4][4], int valor){
+
+    int i,j;
+
+    for(i=0 ; i<2 ; i++){
+        for(j=0 ; j<4 ; j++){
+           if(matriz[i][j]==valor){
+            return 1;
+        }
+    }
+}
+
+    return 0;
+
+}
+
+//função que verifica se os valores da segunda parte não se repetem
+int validaValores2(int  matriz[4][4], int valor){
+
+    int i,j;
+
+    for(i=2 ; i<4 ; i++){
+        for(j=0 ; j<4 ; j++){
+           if(matriz[i][j]==valor){
+            return 1;
+        }
+    }
+}
+
+    return 0;
+
+}
+
+
+// função que roda as tentativas do jogador
 int tentativa(int linha, int coluna, int linha2, int coluna2, int matrizJogo[4][4],int matriz[4][4],int pontos){
 
 
@@ -190,10 +195,34 @@ int tentativa(int linha, int coluna, int linha2, int coluna2, int matrizJogo[4][
             }
     }
 
+               FILE *arq;
+  int i;
+  char nome[50];
+  int result;
+   printf("Digite seu nome:  ");
+            scanf("%s",&nome);
+  //clrscr();
+  arq = fopen("pontos.txt", "a");  // Cria um arquivo texto para gravação
+  if (arq == NULL) // Se nào conseguiu criar
+  {
+     printf("Problemas na CRIACAO do arquivo\n");
+    // return;
+  }
+  for (i = 0; i<1;i++)
+  {
+// A funcao 'fprintf' devolve o número de bytes gravados
+// ou EOF se houve erro na gravação
+      result = fprintf(arq," %s -->  %d\n",nome,pontos);
+      if (result == EOF)
+	  printf("Erro na Gravacao\n");
+  }
+  fclose(arq);
+
     return pontos;
 
 }
 
+// elimina possíveis zeros que restarem de quando a matriz foi zerada
 void excluiZero(int matriz[4][4]){
 
     int i,j;
@@ -207,6 +236,40 @@ void excluiZero(int matriz[4][4]){
     }
 
 }
+
+// função que atribui 0 aos valores da matriz
+int zeraMatriz(int matriz[4][4]){
+
+    int i,j;
+
+    for(i=0 ; i<4 ; i++){
+        for(j=0 ; j<4 ; j++){
+            matriz[i][j] = 0;
+        }
+    }
+
+   // return matriz;
+}
+
+void ranking(){
+	FILE *arq;
+	char texto_str[20];
+
+  //abrindo o arquivo_frase em modo "somente leitura"
+  arq = fopen("pontos.txt", "r");
+
+  //enquanto não for fim de arquivo o looping será executado
+  //e será impresso o texto
+  while(fgets(texto_str, 20, arq) != NULL)
+  printf("%s", texto_str);
+
+  //fechando o arquivo
+  fclose(arq);
+
+  getch();
+
+}
+
 
 main(){
 
@@ -231,33 +294,13 @@ main(){
 
             tentativa(linha,coluna,linha2,coluna2,matrizJogo,matriz,pontos);
 
+        case 2: ranking();
+
+
+
         }
 
 
 
     } while (opcao!=3);
-
-}
-
-
-int zeraMatriz(int matriz[4][4]){
-
-    int i,j;
-
-    for(i=0 ; i<4 ; i++){
-        for(j=0 ; j<4 ; j++){
-            matriz[i][j] = 0;
-        }
-    }
-
-    return matriz;
-}
-
-
-
-
-
-
-
-
-
+	}
